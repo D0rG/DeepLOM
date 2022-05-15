@@ -9,7 +9,7 @@ public class PowerSwitch : MonoBehaviour
     [SerializeField] private GameObject ButtonObject;
     [SerializeField] private LinearMapping linearMapping;
 
-    [HideInInspector] public UnityEvent onPowerStatusChange;
+    [HideInInspector] public BoolUnityEvent onPowerStatusChange = new BoolUnityEvent();
     public bool powerEnabled {  get; private set; }
     private bool _powerEnabled
     {
@@ -20,7 +20,7 @@ public class PowerSwitch : MonoBehaviour
         set
         {
             powerEnabled = value;
-            onPowerStatusChange.Invoke();
+            onPowerStatusChange.Invoke(value);
         }
     }
 
@@ -50,6 +50,11 @@ public class PowerSwitch : MonoBehaviour
             interactable.attachedToHand.DetachObject(ButtonObject);
         }
     }
+}
+
+public class BoolUnityEvent : UnityEvent<bool>
+{
+    //
 }
 
 

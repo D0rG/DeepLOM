@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ServerRack : MonoBehaviour
@@ -16,8 +17,83 @@ public class ServerRack : MonoBehaviour
     [SerializeField] private Light[] redLights;
 
     private readonly byte noBlinkCount = 4;
+    private List<Coroutine> corutines = new List<Coroutine>(2);
 
     private void Awake()
+    {
+        InitLightsColor();
+    }
+
+    private void Start()
+    {
+        PowerSwitch.instance.onPowerStatusChange.AddListener((power) =>
+        {
+            if (power)
+            {
+                PowerOn();
+            }
+            else
+            {
+                PowerOff();
+            }
+        });
+
+        StartBlinking();
+    }
+
+    private void StartOrangeBlinking()
+    {
+        var corutine = StartCoroutine(BlickCorotune(orangeLights, timeStapOrange, false));
+        corutines.Add(corutine);
+    }
+
+    private void StartBlinking()
+    {
+        if (greenLights.Length != 0)
+        {
+            var corutine = StartCoroutine(BlickCorotune(greenLights, timeStapGreen));
+            corutines.Add(corutine);
+        }
+
+        if (orangeLights.Length != 0)
+        {
+            Invoke("StartOrangeBlinking", Random.RandomRange(0f, startRange));
+        }
+    }
+
+    private void PowerOff()
+    {
+        StopAllCoroutines();
+
+        foreach (var greenLight in greenLights)
+        {
+            greenLight.enabled = false;
+        }
+
+        foreach (var orangeLight in orangeLights)
+        {
+            orangeLight.enabled = false;
+        }
+
+        foreach (var redLight in redLights)
+        {
+            redLight.enabled = false;
+        }
+
+        corutines.Clear();
+    }
+
+    private void PowerOn()
+    {
+        StartBlinking();
+
+        foreach(var redLight in redLights)
+        {
+            redLight.enabled = true;
+        }
+    }
+
+    private void InitLightsColor()
     {
         foreach (var greenLight in greenLights)
         {
@@ -33,24 +109,6 @@ public class ServerRack : MonoBehaviour
         {
             redLight.color = redMaterial.color;
         }
-    }
-
-    private void Start()
-    {
-        if (greenLights.Length != 0)
-        {
-            StartCoroutine(BlickCorotune(greenLights, timeStapGreen));
-        }
-
-        if (orangeLights.Length != 0)
-        {
-            Invoke("StartOrangeBlinking", Random.RandomRange(0f, startRange));
-        }
-    }
-
-    private void StartOrangeBlinking()
-    {
-        StartCoroutine(BlickCorotune(orangeLights, timeStapOrange, false));
     }
 
     private IEnumerator BlickCorotune(Light[] lights, float timeStap, bool isGreenLight = true)
