@@ -877,6 +877,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 690915275701209860, guid: 88fbc2e404cc62c4fbb9390e9edfba7a, type: 3}
+      propertyPath: maxPressure
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 1153194665566799539, guid: 88fbc2e404cc62c4fbb9390e9edfba7a, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -925,6 +929,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u041E\u0433\u043D\u0435\u0442\u0443\u0448\u0438\u0442\u0435\u043B\u044C
         \u043F\u043E\u0440\u043E\u0448\u043A\u043E\u0432\u044B\u0439"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2638246553124221469, guid: 88fbc2e404cc62c4fbb9390e9edfba7a, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88fbc2e404cc62c4fbb9390e9edfba7a, type: 3}
