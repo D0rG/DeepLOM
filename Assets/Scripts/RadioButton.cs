@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+[AddComponentMenu("_DeepLOM/RadioButton")]
 public class RadioButton : MonoBehaviour
 {
     public EmulationType emulationType;

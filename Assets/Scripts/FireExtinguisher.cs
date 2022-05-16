@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 using Valve.VR;
 
+[AddComponentMenu("_DeepLOM/FireExtinguisher")]
 public class FireExtinguisher : MonoBehaviour
 {
     [SerializeField][Range(0, 1f)] private float charge = 1f;
@@ -11,45 +11,44 @@ public class FireExtinguisher : MonoBehaviour
     [SerializeField] private FireExtinguisherType extinguisherType;
     [SerializeField] private SafetyRing safetyRing;
     [SerializeField] private Interactable interactable;
-    [SerializeField] private GameObject extrudedParticles;
+    [SerializeField] private ParticleSystem extrudedParticles;
     [SerializeField] private PressureGauge pressureGauge;
     [SerializeField][Range(0, 10f)] private float extrusionSpeed;
+    [SerializeField][Range(0, 5f)] private float extrudingLenght;
+    private Transform transformExtruding;
 
     [Header("Debug")]
     [SerializeField] private bool extrude = false;  //Для проверки огнетушителей без шлема
 
-    private void StartExtruding()
-    {
-        Extruding(true);
-    }
-
-    private void StopExtruding()
+    private void Awake()
     {
         Extruding(false);
+        transformExtruding = extrudedParticles.transform;
     }
 
     private void Extruding(bool isExtruding)
     {
-        extrudedParticles.SetActive(isExtruding);
-        extrude = isExtruding;
+        if (isExtruding)
+        {
+            extrudedParticles.Play();
+            StartCoroutine(ExtrudingOnFireChech());
+        }
+        else
+        {
+            extrudedParticles.Stop();
+            StopAllCoroutines();
+        }
     }
 
     private void Update()
     {
         if (safetyRing.ringConnected) { return; }   //Кольцо предохранитель на месте
 
-        if (interactable.attachedToHand != null || extrude)
+        if (interactable.attachedToHand != null || extrude) //Если взят в руку, или дебаг
         {
-            SteamVR_Input_Sources source = SteamVR_Input_Sources.Camera;
-
-            if (!extrude) 
+            if ((extrude || pressAction[interactable.attachedToHand.handType].stateDown) && charge > 0)
             {
-                source = interactable.attachedToHand.handType;
-            }
-            
-
-            if ((extrude || pressAction[source].stateDown) && charge > 0)
-            {
+                Extruding(true);
                 float delta = extrusionSpeed * Time.deltaTime;
                 if (charge - delta >= 0)
                 {
@@ -60,8 +59,39 @@ public class FireExtinguisher : MonoBehaviour
                     charge = 0;
                 }
             }
+            else
+            {
+                Extruding(false);
+            }
             pressureGauge.pressure = charge;
         }
+        else
+        {
+            Extruding(false);
+        }
+    }
+
+    private IEnumerator ExtrudingOnFireChech()
+    {
+        while (true)
+        {
+            RaycastHit hit;
+            Ray ray = new Ray(transformExtruding.position, transformExtruding.right);
+
+            if (Physics.Raycast(ray, out hit, extrudingLenght))
+            {
+                Debug.DrawRay(ray.origin, ray.direction, Color.cyan);
+                var fire = hit.collider.GetComponent<FirePoint>();
+                if (fire != null)
+                {
+                    fire.PutOutFire();
+                }
+            }
+
+            yield  return new WaitForFixedUpdate();
+        }
+
+        yield return null;
     }
 }
 

@@ -6,6 +6,7 @@ using System.IO;
 using System.Data;
 using System.Threading;
 
+[AddComponentMenu("_DeepLOM/SQL_Connector")]
 public class SQL_Connector : MonoBehaviour
 {
     public SqliteConnection connection { get; private set; }

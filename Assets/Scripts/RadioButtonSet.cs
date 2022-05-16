@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[AddComponentMenu("_DeepLOM/RadioButtonSet")]
 public class RadioButtonSet : MonoBehaviour
 {
     [SerializeField] private RadioButton[] buttons;

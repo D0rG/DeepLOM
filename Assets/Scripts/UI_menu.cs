@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("_DeepLOM/UI_menu")]
 public class UI_menu : MonoBehaviour
 {
     [SerializeField] private RadioButtonSet RadioButtonSet;

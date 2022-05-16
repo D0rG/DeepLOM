@@ -1,6 +1,7 @@
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
+[AddComponentMenu("_DeepLOM/SafetyRing")]
 public class SafetyRing : MonoBehaviour
 {
     [SerializeField] private LinearMapping linearMapping;

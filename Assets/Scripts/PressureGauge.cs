@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[AddComponentMenu("_DeepLOM/PressureGauge")]
 public class PressureGauge : MonoBehaviour
 {
     /// <summary>

@@ -4,6 +4,7 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
+[AddComponentMenu("_DeepLOM/PlayerMovement")]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 0.1f;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("_DeepLOM/ServerRack")]
 public class ServerRack : MonoBehaviour
 {
     [SerializeField] [Range(0f, 1)] private float timeStapGreen = 0.08f;

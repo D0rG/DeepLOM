@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Valve.VR.InteractionSystem;
 
+[AddComponentMenu("_DeepLOM/PowerSwitch")]
 public class PowerSwitch : MonoBehaviour
 {
     public static PowerSwitch instance;

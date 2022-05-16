@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+[AddComponentMenu("_DeepLOM/Timer")]
 public class Timer : MonoBehaviour
 {
     public float seconds { get; private set; }
