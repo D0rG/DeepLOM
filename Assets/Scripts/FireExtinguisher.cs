@@ -15,6 +15,8 @@ public class FireExtinguisher : MonoBehaviour
     [SerializeField] private PressureGauge pressureGauge;
     [SerializeField][Range(0, 10f)] private float extrusionSpeed;
     [SerializeField][Range(0, 5f)] private float extrudingLenght;
+    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private Material[] materials;
     private Transform transformExtruding;
 
     [Header("Debug")]
@@ -24,6 +26,7 @@ public class FireExtinguisher : MonoBehaviour
     {
         Extruding(false);
         transformExtruding = extrudedParticles.transform;
+        meshRenderer.material = materials[(int)extinguisherType];
     }
 
     private void Extruding(bool isExtruding)

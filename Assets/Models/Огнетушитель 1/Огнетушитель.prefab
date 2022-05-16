@@ -132,8 +132,7 @@ GameObject:
   - component: {fileID: 2638246553124221469}
   - component: {fileID: 1953380276061355872}
   m_Layer: 0
-  m_Name: "\u041E\u0433\u043D\u0435\u0442\u0443\u0448\u0438\u0442\u0435\u043B\u044C
-    \u043F\u043E\u0440\u043E\u0448\u043A\u043E\u0432\u044B\u0439"
+  m_Name: "\u041E\u0433\u043D\u0435\u0442\u0443\u0448\u0438\u0442\u0435\u043B\u044C"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,7 +184,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bce68caa9ecd16643a1084dbe11ae30e, type: 2}
+  - {fileID: 2100000, guid: 3d89697c2e2678b4c931d1e88df5d1b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -229,7 +228,12 @@ MonoBehaviour:
   extrudedParticles: {fileID: 5265515593547165001}
   pressureGauge: {fileID: 690915275701209860}
   extrusionSpeed: 0.05
-  extrudingLenght: 0
+  extrudingLenght: 2
+  meshRenderer: {fileID: 1153194665566799541}
+  materials:
+  - {fileID: 2100000, guid: 90c96a84f4c89b44d870c2eda8a600c7, type: 2}
+  - {fileID: 2100000, guid: 7ee97d2bb0e0a5c469fb32e21380d071, type: 2}
+  - {fileID: 2100000, guid: bce68caa9ecd16643a1084dbe11ae30e, type: 2}
   extrude: 0
 --- !u!114 &2769012928953157119
 MonoBehaviour:
@@ -352,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffefbea063cab884ca33e5a449e5c22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachmentFlags: 44
+  attachmentFlags: 40
   attachmentOffset: {fileID: 0}
   catchingSpeedThreshold: -1
   releaseVelocityStyle: 1
