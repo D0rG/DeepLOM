@@ -20,9 +20,9 @@ public class PressureGauge : MonoBehaviour
 
     private void DrawPressure()
     {
-        Vector3 arrowAngle = pressureArrow.rotation.eulerAngles;
+        Vector3 arrowAngle = pressureArrow.localRotation.eulerAngles;
         arrowAngle.z = minPressure + (pressureStep * 100 * pressure);
-        pressureArrow.rotation = Quaternion.Euler(arrowAngle);
+        pressureArrow.localRotation = Quaternion.Euler(arrowAngle);
     }
 
     private void FixedUpdate()

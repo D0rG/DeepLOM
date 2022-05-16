@@ -4,10 +4,12 @@ using UnityEngine;
 [AddComponentMenu("_DeepLOM/Timer")]
 public class Timer : MonoBehaviour
 {
+    public static Timer instance { get; private set; }
     public float seconds { get; private set; }
 
     private void Awake()
     {
+        instance = this;
         ClearTimer();
     }
 

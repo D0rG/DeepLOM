@@ -4,7 +4,7 @@ using UnityEngine;
 public class RadioButtonSet : MonoBehaviour
 {
     [SerializeField] private RadioButton[] buttons;
-    public EmulationType emulationType { get; private set; }
+    public EmulationType emulationType;
 
     private void Awake()
     {
@@ -22,9 +22,10 @@ public class RadioButtonSet : MonoBehaviour
     }
 
     private void RadioButtonChange(EmulationType emulationType)
-    {
+    { 
         foreach (var button in buttons)
         {
+            this.emulationType = emulationType;
             if (button.emulationType != emulationType)
             {
                 button.togle.isOn = false;

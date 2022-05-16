@@ -33,6 +33,15 @@ public class PowerSwitch : MonoBehaviour
         }
 
         powerEnabled = true;
+
+        onPowerStatusChange.AddListener((status) =>
+            {
+                if (!status)
+                {
+                    ScriptPlayer.instance.DoStep();
+                }
+            }
+        );
     }
 
     private void Update()

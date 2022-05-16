@@ -703,6 +703,7 @@ MonoBehaviour:
   interactable: {fileID: 1835581174233958262}
   rigidbody: {fileID: 3077144948333538793}
   linearDrive: {fileID: 3154537043844625037}
+  delete: []
 --- !u!114 &1835581174233958262
 MonoBehaviour:
   m_ObjectHideFlags: 0

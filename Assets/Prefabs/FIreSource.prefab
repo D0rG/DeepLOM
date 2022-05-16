@@ -110,7 +110,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireLifeTime: 0
-  putOutFireSpeed: 0
   fireParticle: {fileID: 0}
 --- !u!1001 &8346343740377699838
 PrefabInstance:

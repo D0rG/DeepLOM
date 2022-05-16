@@ -14,11 +14,12 @@ public class FirePoint : MonoBehaviour
         putOutFireSpeed = Time.fixedDeltaTime / fireLifeTime;
     }
 
-    public void PutOutFire()
+    public void PutOutFire(FireExtinguisherType fireExtinguisherType)
     {
-        if (currLifeTime <= 0)
+        if (currLifeTime <= 0 && fireParticle.active)
         {
             fireParticle.active = false;
+            ScriptPlayer.instance.DoStep(true);
         }
 
         if (fireParticle.active) 

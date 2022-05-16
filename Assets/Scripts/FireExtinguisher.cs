@@ -47,11 +47,19 @@ public class FireExtinguisher : MonoBehaviour
     {
         if (safetyRing.ringConnected) { return; }   //Кольцо предохранитель на месте
 
-        if (interactable.attachedToHand != null || extrude) //Если взят в руку, или дебаг
+        if (interactable.attachedToHand != null) //Если взят в руку, или дебаг
         {
-            if ((extrude || pressAction[interactable.attachedToHand.handType].stateDown) && charge > 0)
+            if (pressAction[interactable.attachedToHand.handType].stateDown)
             {
-                Extruding(true);
+                extrude = true;
+            }
+            else if (pressAction[interactable.attachedToHand.handType].stateUp)
+            {
+                extrude = false;
+            }
+
+            if (extrude && charge > 0)
+            {
                 float delta = extrusionSpeed * Time.deltaTime;
                 if (charge - delta >= 0)
                 {
@@ -62,15 +70,14 @@ public class FireExtinguisher : MonoBehaviour
                     charge = 0;
                 }
             }
-            else
-            {
-                Extruding(false);
-            }
+
+            Extruding(extrude);
             pressureGauge.pressure = charge;
         }
         else
         {
             Extruding(false);
+            extrude = false;
         }
     }
 
@@ -87,7 +94,7 @@ public class FireExtinguisher : MonoBehaviour
                 var fire = hit.collider.GetComponent<FirePoint>();
                 if (fire != null)
                 {
-                    fire.PutOutFire();
+                    fire.PutOutFire(extinguisherType);
                 }
             }
 

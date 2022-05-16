@@ -8,6 +8,8 @@ public class SafetyRing : MonoBehaviour
     [SerializeField] private Interactable interactable;
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private LinearDrive linearDrive;
+
+    [SerializeField] private Component[] delete;
     public bool ringConnected { get; private set; }
     private bool detached = false;
 
@@ -18,7 +20,7 @@ public class SafetyRing : MonoBehaviour
 
     private void Update()
     {
-        if (linearMapping.value >= 1f && !detached)
+        if (linearMapping != null && linearMapping.value >= 1f && !detached)
         {
             Detach();
         }
@@ -35,8 +37,13 @@ public class SafetyRing : MonoBehaviour
             gameObject.transform.parent = null;
             rigidbody.isKinematic = false;
             rigidbody.useGravity = true;
-
             ringConnected = false;
+
+            foreach (var component in delete)
+            {
+                Destroy(component);
+            }
+            ScriptPlayer.instance.DoStep();
         }
     }
 }

@@ -13,6 +13,9 @@ public class UI_menu : MonoBehaviour
     public void PressButton(int scriptIndex)
     {
         EmulationScript currScript = (EmulationScript)scriptIndex;
+        EmulationType emulationType = RadioButtonSet.emulationType;
+
+        ScriptPlayer.instance.StartScript(emulationType, currScript);
     }
 }
 public enum EmulationType
