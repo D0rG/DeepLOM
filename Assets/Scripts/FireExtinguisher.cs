@@ -20,7 +20,7 @@ public class FireExtinguisher : MonoBehaviour
     private Transform transformExtruding;
 
     [Header("Debug")]
-    [SerializeField] private bool extrude = false;  //Для проверки огнетушителей без шлема
+    [SerializeField] private bool extrude = false; 
 
     private void Awake()
     {
